@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "author": "Uri Shaked",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-breadboard",
+      "id": "bb1",
+      "top": -14.2,
+      "left": -197.6,
+      "rotate": 90,
+      "attrs": {}
+    },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -7.1, "left": 90.6, "attrs": {} },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": 128,
+      "left": -296.8,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr2",
+      "top": 166.2,
+      "left": 362.8,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -230.1,
+      "left": 282.6,
+      "attrs": { "temperature": "29.9", "humidity": "54.5" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -247.2,
+      "left": -103.8,
+      "attrs": { "volume": "0.1" }
+    },
+    { "type": "wokwi-servo", "id": "servo1", "top": -50, "left": 374.4, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "bb1:bp.1", "bb1:tp.1", "red", [ "v0" ] ],
+    [ "bb1:tn.2", "bb1:bn.2", "black", [ "v0" ] ],
+    [ "esp:D12", "bb1:36b.h", "", [ "$bb" ] ],
+    [ "esp:D27", "bb1:34b.h", "", [ "$bb" ] ],
+    [ "esp:D35", "bb1:29b.h", "", [ "$bb" ] ],
+    [ "esp:VN", "bb1:27b.h", "", [ "$bb" ] ],
+    [ "esp:VP", "bb1:26b.h", "", [ "$bb" ] ],
+    [ "esp:3V3", "bb1:tp.31", "red", [ "v0" ] ],
+    [ "esp:GND.1", "bb1:tn.30", "black", [ "h0" ] ],
+    [ "bz1:1", "bb1:bn.9", "black", [ "v0" ] ],
+    [ "dht1:VCC", "bb1:tp.9", "red", [ "v0" ] ],
+    [ "dht1:GND", "bb1:tn.10", "black", [ "v0" ] ],
+    [ "bz1:2", "esp:D12", "green", [ "v0" ] ],
+    [ "dht1:SDA", "esp:D15", "green", [ "v0" ] ],
+    [ "ldr1:VCC", "bb1:bp.31", "red", [ "h0" ] ],
+    [ "ldr1:GND", "bb1:bn.31", "black", [ "h0" ] ],
+    [ "ldr2:GND", "bb1:tn.35", "black", [ "h0" ] ],
+    [ "ldr2:VCC", "bb1:tp.36", "red", [ "h0" ] ],
+    [ "servo1:GND", "bb1:tn.16", "black", [ "h0" ] ],
+    [ "servo1:V+", "bb1:tp.18", "red", [ "h0" ] ],
+    [ "servo1:PWM", "esp:D18", "green", [ "h-9.6", "v55.6" ] ],
+    [ "ldr2:AO", "esp:D35", "green", [ "h-96", "v-125.9" ] ],
+    [ "ldr1:AO", "esp:D34", "green", [ "h105.6", "v-127.5" ] ]
+  ],
+  "dependencies": {}
+}
